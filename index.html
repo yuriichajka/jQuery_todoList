@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <input type="text" class="txtb" placeholder="Add a task">
+        <div class="notcomp">
+            <h3>Not Completed</h3>
+        </div>
+
+        <div class="comp">
+            <h3>Completed</h3>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        $(".txtb").on("keyup", function(e){
+            if(e.keyCode === 13 && $(".txtb").val() !== "")
+            {
+                let task = $("<div class='task'></div>").text($(".txtb").val());
+                let del = $("<i class='fas fa-trash-alt'></i>").click(function(){
+                   let p = $(this).parent();
+                   p.fadeOut(function(){
+                      p.remove();
+                   });
+                });
+
+                let check = $("<i class='fas fa-check'></i>").click(function(){
+                    let p = $(this).parent();
+                    p.fadeOut(function(){
+                        $(".comp").append(p);
+                        p.fadeIn();
+                    });
+                    $(this).remove();
+                });
+
+                task.append(del, check);
+                $(".notcomp").append(task);
+
+                $(".txtb").val("");
+            }
+        });
+    </script>
+
+</body>
+</html>
